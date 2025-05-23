@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro de Horario</title>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+</head>
+<body>
+  <h2>Registro de ingreso/salida</h2>
+  <input type="email" id="email" placeholder="Correo"><br>
+  <input type="password" id="password" placeholder="Contraseña"><br>
+  <select id="tipo">
+    <option value="Ingreso">Ingreso</option>
+    <option value="Salida">Salida</option>
+  </select><br><br>
+  <button onclick="registrar()">Continuar</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_DOMINIO.firebaseapp.com",
+      projectId: "TU_ID",
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    async function registrar() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const tipo = document.getElementById("tipo").value;
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const nombre = userCredential.user.displayName || "No registrado";
+        const response = await fetch("URL_DEL_WEB_APP", {
+          method: "POST",
+          body: JSON.stringify({ nombre, correo: email, tipo }),
+          headers: { "Content-Type": "application/json" },
+        });
+        alert("Registro exitoso");
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    }
+  </script>
+</body>
+</html>
