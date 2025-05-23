@@ -40,7 +40,7 @@
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const nombre = userCredential.user.displayName || "No registrado";
 
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwz9M0vTZo6Zov7ddfeUIOHryze2XIPUq2dGU2cuJa4_f7hxYX-_pqITh8o3iBpU3ua/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwVfoLCTZ2azs5TNeAvkm1p_fP_xNSe5Auweb9rtp00uZDQ4gANFpxRxLmX298LthlG/exec", {
           method: "POST",
           body: JSON.stringify({ nombre, correo: email, tipo }),
           headers: { "Content-Type": "application/json" },
