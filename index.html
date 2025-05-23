@@ -42,6 +42,7 @@
 
         const response = await fetch("https://script.google.com/macros/s/AKfycbwVfoLCTZ2azs5TNeAvkm1p_fP_xNSe5Auweb9rtp00uZDQ4gANFpxRxLmX298LthlG/exec", {
           method: "POST",
+          mode: "no-cors",
           body: JSON.stringify({ nombre, correo: email, tipo }),
           headers: { "Content-Type": "application/json" },
         });
